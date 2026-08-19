@@ -1,0 +1,7 @@
+# Aimesi skin bundle patch: inserts its public dsh.client entry into the web
+# plugin roster. Install with `dsh plugin --profile <name> add <path>`; mutual
+# exclusion between skins is managed through the user patch layers
+# (disabled rows), exactly like the dsh-deep-whale skins.
+- insert:
+    - id: ui-skin-aimesi
+      name: '@dsh-external/dsh-client-ui-skin-aimesi'

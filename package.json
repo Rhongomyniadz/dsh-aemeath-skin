@@ -1,0 +1,42 @@
+{
+  "name": "@dsh-external/dsh-client-ui-skin-aimesi",
+  "description": "Hot-pluggable Aimesi (Wuthering Waves fan) skin for the dsh web GUI: pink mecha palette, heart-shaped tacet mark, and user-provided wallpapers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./skin.json": "./skin.json",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "skin.json",
+    "preview",
+    "src",
+    "assets",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ]
+}

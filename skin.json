@@ -1,0 +1,26 @@
+{
+  "id": "aimesi",
+  "name": "爱弥斯",
+  "nameEn": "Aimesi · Pink Mecha",
+  "author": "custom skin (assembled by dsh agent)",
+  "tagline": "粉色机娘主题 · 爱心声痕 · 隧者机甲风",
+  "description": "以鸣潮角色爱弥斯为灵感的粉丝向皮肤：粉色为主色调，界面采用深莓紫玻璃面板与电光粉信号线，点缀隧者机兵风的 HUD 角标与切角边框。对话区与侧栏使用用户指定的两张背景图；用户输入框上方与侧栏底部原本的蝴蝶结位置替换为爱弥斯胸前的爱心形声痕（呼吸发光）。纯展示层客户端插件：不注入服务、不发事件、不触达模型请求，素材全部内嵌于 bundle，不依赖远程资源。",
+  "tags": [
+    "pink",
+    "mecha",
+    "anime",
+    "wuthering-waves-fan"
+  ],
+  "accent": "#ff6fb1",
+  "bodyAttr": "data-dsh-aimesi",
+  "package": "@dsh-external/dsh-client-ui-skin-aimesi",
+  "wiring": {
+    "id": "ui-skin-aimesi",
+    "bundleWired": false
+  },
+  "preview": {
+    "light": "preview/light.png",
+    "dark": "preview/dark.png"
+  },
+  "order": 3
+}
