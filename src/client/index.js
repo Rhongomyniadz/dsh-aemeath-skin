@@ -264,14 +264,6 @@ function apply(ctx) {
     subtree: true,
   })
 
-  // Top trim: the fixed pink signal strip along the viewport top edge.
-  const topTrim = document.createElement('div')
-  topTrim.dataset.skinChrome = 'top-trim'
-  topTrim.dataset.skinOwner = SKIN_OWNER
-  topTrim.setAttribute('aria-hidden', 'true')
-  ownedNodes.add(topTrim)
-  body.append(topTrim)
-
   // Bottom trim: the pink signal line; the stylesheet retracts it while a
   // conversation is active so it never collides with the bottom composer.
   const bottomTrim = document.createElement('div')

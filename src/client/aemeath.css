@@ -247,27 +247,6 @@ body[data-dsh-aemeath] [data-aemeath-sidebar-footer] [data-slot='sidebar.setting
   z-index: 2;
 }
 
-/* ---------- top trim: the pink circuit line along the top edge ---------- */
-
-body[data-dsh-aemeath] [data-skin-chrome='top-trim'] {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 19;
-  height: 48px;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      var(--aemeath-pink-500) 0 16px,
-      transparent 16px 52px
-    ),
-    linear-gradient(180deg, var(--aemeath-pink-600), rgba(255, 79, 163, 0.3));
-  background-position: center top, center top;
-  background-size: 100% 2px, 100% 2px;
-  background-repeat: repeat-x, no-repeat;
-  opacity: 0.85;
-}
-
 /* ---------- composer heart: the input box's top edge passes through its
    center (half in, half out), horizontally centered on the box ---------- */
 
