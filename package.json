@@ -1,6 +1,6 @@
 {
-  "name": "@dsh-external/dsh-client-ui-skin-aimesi",
-  "description": "Hot-pluggable Aimesi (Wuthering Waves fan) skin for the dsh web GUI: pink mecha palette, heart-shaped tacet mark, and user-provided wallpapers",
+  "name": "@dsh-external/dsh-client-ui-skin-aemeath",
+  "description": "Hot-pluggable Aemeath (Wuthering Waves fan) skin for the dsh web GUI: pink mecha palette, heart-shaped tacet mark, and user-provided wallpapers",
   "version": "0.1.0",
   "private": true,
   "type": "module",

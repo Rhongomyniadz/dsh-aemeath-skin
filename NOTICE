@@ -1,41 +1,12 @@
-aimesi (爱弥斯 · Aimesi Pink Mecha)
+Aemeath (爱弥斯 · Aemeath Pink Mecha)
 ===================================
 
 Third-party derivative notice (CC BY-NC-SA 4.0 attribution chain)
 
-1. Skin architecture & lifecycle code derived from the
-   `maid-atelier` skin of the dsh-deep-whale distribution
-   (https://github.com/Small-tailqwq/dsh-deep-whale), which is licensed
-   CC BY-NC-SA 4.0. Per its ShareAlike terms its attribution chain is
-   preserved here in full:
-
-   a. 一创 (initial creation): 上善 — the original whale-girl character
-      design. Profile: https://www.pixiv.net/users/62155430
-   b. 二创 (secondary creation): zipzip — the maid whale-girl redesign
-      adding DeepSeek elements, based on 上善's whale-girl (GPT Image 2).
-      Profile: https://www.pixiv.net/users/18604994
-   c. 三创: Small-tailqwq (dsh-external/dsh-deep-whale) — the maid-atelier
-      skin whose DOM-decoration architecture, CSS-variable theming approach,
-      and disposer-based lifecycle this skin adapts.
-
-   NOTE: this skin does not include any whale-girl artwork. Only the code
-   structure and styling approach are derivative; all visual assets are
-   either drawn for this skin or user-provided.
-
-2. 本皮肤 (this skin): assembled by a dsh agent for the user. Original
-   additions: the heart-shaped tacet-mark ornament (an original geometric
-   interpretation drawn as SVG, not an extracted game asset), the pink
-   mecha palette, and the HUD corner/chip styling.
-
-3. Theme reference: 爱弥斯 (Aimesi) is a character from Wuthering Waves
-   (鸣潮) © Kuro Games. This skin is an unofficial fan-made personal
-   presentation theme; it is not affiliated with, endorsed by, or sponsored
-   by Kuro Games.
-
-4. Background images: assets/chat.webp and assets/sidebar.webp are
-   user-provided personal artwork (from the user's own Downloads folder).
-   Copyright belongs to their respective owners; they are embedded for the
-   user's personal use only.
+爱弥斯 (Aemeath) is a character from Wuthering Waves
+(鸣潮) © Kuro Games. This skin is an unofficial fan-made personal
+presentation theme; it is not affiliated with, endorsed by, or sponsored
+by Kuro Games.
 
 Usage terms: CC BY-NC-SA 4.0 — attribution must keep the complete chain
 above; non-commercial use only; derivatives must be shared alike.

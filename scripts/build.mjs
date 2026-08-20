@@ -1,5 +1,5 @@
 /**
- * Deterministic assembler for the Aimesi skin bundle.
+ * Deterministic assembler for the Aemeath skin bundle.
  *
  * No external toolchain: the client bundle is emitted in the exact
  * __ModuleLoader__ factory format the dsh web shell consumes (same contract
@@ -7,7 +7,7 @@
  * inlined with the loader-owned <style data-plugin> convention so the HMR
  * driver removes it on unload.
  *
- * Inputs  : assets/*.webp, src/client/{art.js,index.js}, src/client/aimesi.css
+ * Inputs  : assets/*.webp, src/client/{art.js,index.js}, src/client/aemeath.css
  * Outputs : src/client/background-art.generated.js (source-parity record),
  *           lib/client.js, lib/index.js
  */
@@ -16,8 +16,8 @@ import { dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
-const PACKAGE_NAME = '@dsh-external/dsh-client-ui-skin-aimesi'
-const CSS_TAG_ID = `${PACKAGE_NAME}/src/client/aimesi.css`
+const PACKAGE_NAME = '@dsh-external/dsh-client-ui-skin-aemeath'
+const CSS_TAG_ID = `${PACKAGE_NAME}/src/client/aemeath.css`
 
 const region = (name, body) => `\t\t//#region ${name}\n${body}\n\t\t//#endregion`
 
@@ -56,17 +56,17 @@ await write('src/client/background-art.generated.js', generatedBody)
 
 /* 2. Client bundle assembly. */
 const index = await read('src/client/index.js')
-const css = await read('src/client/aimesi.css')
+const css = await read('src/client/aemeath.css')
 
 const cssInjection = [
   '// Stylesheet inlined at materialization with the loader-owned tag',
   '// convention: <style data-plugin> is removed by the HMR driver on unload.',
-  `const AIMESI_CSS = ${JSON.stringify(css)};`,
+  `const AEMEATH_CSS = ${JSON.stringify(css)};`,
   'if (typeof document !== "undefined" && document.querySelector(\'style[data-plugin-css="\' + ' + JSON.stringify(CSS_TAG_ID) + ' + \'"]\') === null) {',
   '  const cssTag = document.createElement("style");',
   `  cssTag.dataset.plugin = ${JSON.stringify(PACKAGE_NAME)};`,
   `  cssTag.dataset.pluginCss = ${JSON.stringify(CSS_TAG_ID)};`,
-  '  cssTag.textContent = AIMESI_CSS;',
+  '  cssTag.textContent = AEMEATH_CSS;',
   '  document.head.appendChild(cssTag);',
   '}',
 ].join('\n')
@@ -79,7 +79,7 @@ const client = [
   '\t\tvar exports = module.exports;',
   '\t\tObject.defineProperty(exports, Symbol.toStringTag, { value: "Module" });',
   region('src/client/background-art.generated.js', indentBlock(generatedBody)),
-  region('src/client/aimesi.css (inlined)', indentBlock(cssInjection)),
+  region('src/client/aemeath.css (inlined)', indentBlock(cssInjection)),
   region('src/client/index.js', indentBlock(index)),
   '\t\texports.apply = apply;',
   '\t\treturn module.exports;',

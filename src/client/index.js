@@ -1,5 +1,5 @@
 /**
- * 爱弥斯 (Aimesi) skin — presentation-only client plugin for the dsh web GUI.
+ * 爱弥斯 (Aemeath) skin — presentation-only client plugin for the dsh web GUI.
  *
  * The DOM-decoration architecture adapts the maid-atelier skin (see NOTICE):
  * a body attribute scopes the stylesheet, body-level custom properties carry
@@ -14,17 +14,17 @@
  * SIDEBAR_MARK / CHAT_MARK (background-art.generated.js).
  */
 
-const SKIN_OWNER = 'aimesi'
+const SKIN_OWNER = 'aemeath'
 const SKIN_TITLE = '爱弥斯 · DeepSeek Harness'
 const SKIN_SYSTEM_CHROME_COLOR = '#1e1430'
 const SIDEBAR_COLUMN_SELECTOR = ":is([data-pane='sidebar'], [class*='sidebarCol'])"
 const ACTIVE_CHAT_SELECTOR = "[data-phase='active'] [data-chat-flow]"
 const COMPOSER_CARD_SELECTOR = "[data-phase='hero'] [data-composer-card], [data-phase='active'] [data-composer-card]"
 const ART_SLOT_PROPERTIES = [
-  '--aimesi-chat-art',
-  '--aimesi-raster-heart-art',
-  '--aimesi-sidebar-mark-art',
-  '--aimesi-chat-mark-art',
+  '--aemeath-chat-art',
+  '--aemeath-raster-heart-art',
+  '--aemeath-sidebar-mark-art',
+  '--aemeath-chat-mark-art',
 ]
 
 /** Four mecha HUD corner brackets, absolutely positioned by the stylesheet. */
@@ -53,7 +53,7 @@ function apply(ctx) {
 
   const previousProperties = new Map()
   for (const property of [
-    '--aimesi-sidebar-width',
+    '--aemeath-sidebar-width',
     ...ART_SLOT_PROPERTIES,
   ]) {
     previousProperties.set(property, body.style.getPropertyValue(property))
@@ -69,9 +69,9 @@ function apply(ctx) {
   let themeColorObserver = undefined
 
   ctx.effect(() => () => {
-    delete body.dataset.dshAimesi
-    delete body.dataset.aimesiChatActive
-    delete body.dataset.aimesiSidebarSize
+    delete body.dataset.dshAemeath
+    delete body.dataset.aemeathChatActive
+    delete body.dataset.aemeathSidebarSize
     observer?.disconnect()
     themeColorObserver?.disconnect()
     resizeObserver?.disconnect()
@@ -80,23 +80,23 @@ function apply(ctx) {
     }
     ownedNodes.forEach(element => element.remove())
     decoratedElements.forEach((element) => {
-      delete element.dataset.aimesiSidebarFooter
+      delete element.dataset.aemeathSidebarFooter
     })
     if (themeColorMeta?.isConnected && themeColorMeta.content === SKIN_SYSTEM_CHROME_COLOR) {
       themeColorMeta.content = previousThemeColor ?? ''
     }
     if (document.title === SKIN_TITLE) document.title = originalTitle
-  }, 'ui-skin-aimesi: pink mecha skin')
+  }, 'ui-skin-aemeath: pink mecha skin')
 
-  body.dataset.dshAimesi = ''
+  body.dataset.dshAemeath = ''
 
   // Artwork slots consumed by the stylesheet. The stylesheet owns every
   // background layer (scrim + wallpaper) so light/dark switching re-tints the
   // scrim without touching the artwork URL.
-  body.style.setProperty('--aimesi-chat-art', `url(${CHAT_BACKDROP})`)
-  body.style.setProperty('--aimesi-raster-heart-art', `url(${RASTER_HEART_MARK})`)
-  body.style.setProperty('--aimesi-sidebar-mark-art', `url(${SIDEBAR_MARK})`)
-  body.style.setProperty('--aimesi-chat-mark-art', `url(${CHAT_MARK})`)
+  body.style.setProperty('--aemeath-chat-art', `url(${CHAT_BACKDROP})`)
+  body.style.setProperty('--aemeath-raster-heart-art', `url(${RASTER_HEART_MARK})`)
+  body.style.setProperty('--aemeath-sidebar-mark-art', `url(${SIDEBAR_MARK})`)
+  body.style.setProperty('--aemeath-chat-mark-art', `url(${CHAT_MARK})`)
 
   // Browser chrome color follows the plum shell.
   const syncSystemChrome = () => {
@@ -123,15 +123,15 @@ function apply(ctx) {
     const sidebar = document.querySelector(SIDEBAR_COLUMN_SELECTOR)
     if (!sidebar) return
 
-    sidebar.querySelectorAll('[data-aimesi-sidebar-footer]').forEach((element) => {
-      delete element.dataset.aimesiSidebarFooter
+    sidebar.querySelectorAll('[data-aemeath-sidebar-footer]').forEach((element) => {
+      delete element.dataset.aemeathSidebarFooter
     })
     const settingsSlot = sidebar.querySelector("[data-slot='sidebar.settings']")
     if (settingsSlot) {
       let footer = settingsSlot.parentElement
       while (footer && footer !== sidebar) {
         if (footer.querySelector("[data-slot='sidebar.footer.action']")) {
-          footer.dataset.aimesiSidebarFooter = ''
+          footer.dataset.aemeathSidebarFooter = ''
           decoratedElements.add(footer)
           break
         }
@@ -146,11 +146,11 @@ function apply(ctx) {
     }
   }
 
-  // Sidebar width → --aimesi-sidebar-width (trim offsets) and a size bucket.
+  // Sidebar width → --aemeath-sidebar-width (trim offsets) and a size bucket.
   const applySidebarWidth = (width) => {
     if (width <= 0) return
-    body.style.setProperty('--aimesi-sidebar-width', `${Math.round(width * 100) / 100}px`)
-    body.dataset.aimesiSidebarSize = width <= 120 ? 'rail' : width <= 220 ? 'narrow' : 'wide'
+    body.style.setProperty('--aemeath-sidebar-width', `${Math.round(width * 100) / 100}px`)
+    body.dataset.aemeathSidebarSize = width <= 120 ? 'rail' : width <= 220 ? 'narrow' : 'wide'
   }
 
   const ensureSidebarObserved = () => {
@@ -168,7 +168,7 @@ function apply(ctx) {
 
   // Projected conversation state: bottom trim retracts while a chat is open.
   const syncChatState = () => {
-    body.toggleAttribute('data-aimesi-chat-active', document.querySelector(ACTIVE_CHAT_SELECTOR) !== null)
+    body.toggleAttribute('data-aemeath-chat-active', document.querySelector(ACTIVE_CHAT_SELECTOR) !== null)
   }
 
   // Composer heart: structurally bound to the input box. The node lives as a

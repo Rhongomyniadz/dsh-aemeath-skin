@@ -1,48 +1,48 @@
 /* ==========================================================================
-   爱弥斯 (Aimesi) skin — pink mecha presentation layer over the stock dsh
-   web GUI. Owned by the ui-skin-aimesi client plugin; every selector is
-   scoped under body[data-dsh-aimesi] so switching skins removes this layer
+   爱弥斯 (Aemeath) skin — pink mecha presentation layer over the stock dsh
+   web GUI. Owned by the ui-skin-aemeath client plugin; every selector is
+   scoped under body[data-dsh-aemeath] so switching skins removes this layer
    atomically. Semantic aliases (--dsw-alias-*) drive the app chrome; the
    skin-owned rules below add the wallpapers, heart marks and HUD details.
    ========================================================================== */
 
 /* ---------- palette & semantic aliases: light ---------- */
 
-body[data-dsh-aimesi] {
+body[data-dsh-aemeath] {
   color: #43213a;
   background-color: #241430; /* fallback behind the chat wallpaper */
   /* The stylesheet owns every backdrop layer: a legibility scrim (light/dark
      variants below) over the chat wallpaper so text always clears it. */
   background-image:
-    var(--aimesi-backdrop-scrim),
-    var(--aimesi-chat-art);
+    var(--aemeath-backdrop-scrim),
+    var(--aemeath-chat-art);
   background-position: center, center top;
   background-size: auto, cover;
   background-attachment: scroll, scroll;
   background-repeat: no-repeat, no-repeat;
 
-  --aimesi-pink-200: #ffd9e9;
-  --aimesi-pink-300: #ffc1dd;
-  --aimesi-pink-400: #ff8fc4;
-  --aimesi-pink-500: #ff6fb1;
-  --aimesi-pink-600: #f04a97;
-  --aimesi-pink-700: #d93a84;
-  --aimesi-glow: rgba(255, 79, 163, 0.55);
-  --aimesi-plum-950: #170f22;
-  --aimesi-plum-900: #1e1430;
-  --aimesi-plum-800: #2a1c40;
-  --aimesi-plum-700: #382654;
-  --aimesi-steel: #4a4460;
-  --aimesi-ice: #b9c8ff;
-  --aimesi-sidebar-width: 280px;
-  --aimesi-backdrop-scrim: linear-gradient(
+  --aemeath-pink-200: #ffd9e9;
+  --aemeath-pink-300: #ffc1dd;
+  --aemeath-pink-400: #ff8fc4;
+  --aemeath-pink-500: #ff6fb1;
+  --aemeath-pink-600: #f04a97;
+  --aemeath-pink-700: #d93a84;
+  --aemeath-glow: rgba(255, 79, 163, 0.55);
+  --aemeath-plum-950: #170f22;
+  --aemeath-plum-900: #1e1430;
+  --aemeath-plum-800: #2a1c40;
+  --aemeath-plum-700: #382654;
+  --aemeath-steel: #4a4460;
+  --aemeath-ice: #b9c8ff;
+  --aemeath-sidebar-width: 280px;
+  --aemeath-backdrop-scrim: linear-gradient(
     180deg,
     rgba(253, 246, 252, 0.66) 0%,
     rgba(253, 246, 252, 0.52) 34%,
     rgba(253, 246, 252, 0.66) 100%
   );
-  --aimesi-shadow-light: 0 18px 54px rgba(116, 24, 82, 0.18), 0 2px 8px rgba(116, 24, 82, 0.12);
-  --aimesi-shadow-dark: 0 18px 58px rgba(0, 0, 0, 0.42), 0 2px 10px rgba(0, 0, 0, 0.3);
+  --aemeath-shadow-light: 0 18px 54px rgba(116, 24, 82, 0.18), 0 2px 8px rgba(116, 24, 82, 0.12);
+  --aemeath-shadow-dark: 0 18px 58px rgba(0, 0, 0, 0.42), 0 2px 10px rgba(0, 0, 0, 0.3);
 
   --dsw-alias-bg-base: transparent;
   --dsw-alias-bg-layer-1: rgba(253, 245, 251, 0.94);
@@ -70,7 +70,7 @@ body[data-dsh-aimesi] {
   --dsw-alias-label-caption: #a1839a;
   --dsw-alias-state-business-primary: #ec5a9d;
   --dsw-alias-state-business-tertiary: #f9dcea;
-  --dsw-shadow-lv2: var(--aimesi-shadow-light);
+  --dsw-shadow-lv2: var(--aemeath-shadow-light);
   --dsw-specific-input-major: rgba(255, 250, 253, 0.94);
   --dsw-specific-selector: rgba(243, 228, 239, 0.96);
   --dsw-specific-sidebar-fill: rgba(26, 15, 38, 0.78);
@@ -78,17 +78,17 @@ body[data-dsh-aimesi] {
 
 /* ---------- palette & semantic aliases: dark ---------- */
 
-body[data-dsh-aimesi][data-ds-dark-theme] {
+body[data-dsh-aemeath][data-ds-dark-theme] {
   color: #f7e8f1;
   background-color: #0f0a1a;
 
-  --aimesi-backdrop-scrim: linear-gradient(
+  --aemeath-backdrop-scrim: linear-gradient(
     180deg,
     rgba(15, 10, 26, 0.74) 0%,
     rgba(15, 10, 26, 0.58) 34%,
     rgba(15, 10, 26, 0.74) 100%
   );
-  --aimesi-shadow-dark: 0 18px 58px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.36);
+  --aemeath-shadow-dark: 0 18px 58px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.36);
   --dsw-alias-bg-base: transparent;
   --dsw-alias-bg-layer-1: rgba(30, 20, 48, 0.88);
   --dsw-alias-bg-layer-2: rgba(36, 24, 56, 0.9);
@@ -115,20 +115,20 @@ body[data-dsh-aimesi][data-ds-dark-theme] {
   --dsw-alias-label-caption: #83657d;
   --dsw-alias-state-business-primary: #ff7fb8;
   --dsw-alias-state-business-tertiary: #3a2456;
-  --dsw-shadow-lv2: var(--aimesi-shadow-dark);
+  --dsw-shadow-lv2: var(--aemeath-shadow-dark);
   --dsw-specific-input-major: rgba(36, 24, 54, 0.92);
   --dsw-specific-selector: rgba(48, 33, 72, 0.94);
   --dsw-specific-sidebar-fill: rgba(15, 10, 26, 0.85);
 }
 
-body[data-dsh-aimesi] [id='root'] {
+body[data-dsh-aemeath] [id='root'] {
   position: relative;
   background: transparent;
 }
 
 /* ---------- sidebar: plain curtain (no wallpaper) ---------- */
 
-body[data-dsh-aimesi] :is([data-pane='sidebar'], [class*='sidebarCol']) {
+body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) {
   position: relative;
   background-color: transparent;
   /* Cover the app's semi-transparent pink pane border (ui-layout sets
@@ -152,41 +152,41 @@ body[data-dsh-aimesi] :is([data-pane='sidebar'], [class*='sidebarCol']) {
 }
 
 /* HUD corner brackets — the 隧者 mecha touch on the rail. */
-body[data-dsh-aimesi] [data-skin-chrome='sidebar-corners'] {
+body[data-dsh-aemeath] [data-skin-chrome='sidebar-corners'] {
   position: absolute;
   inset: 0;
   z-index: 30;
   pointer-events: none;
 }
 
-body[data-dsh-aimesi] [data-skin-corner] {
+body[data-dsh-aemeath] [data-skin-corner] {
   position: absolute;
   width: 15px;
   height: 15px;
-  border: 0 solid var(--aimesi-pink-500);
+  border: 0 solid var(--aemeath-pink-500);
   opacity: 0.9;
-  filter: drop-shadow(0 0 5px var(--aimesi-glow));
+  filter: drop-shadow(0 0 5px var(--aemeath-glow));
 }
 
-body[data-dsh-aimesi] [data-skin-corner='top-left'] {
+body[data-dsh-aemeath] [data-skin-corner='top-left'] {
   top: 6px; left: 6px; border-top-width: 2px; border-left-width: 2px;
 }
 
-body[data-dsh-aimesi] [data-skin-corner='top-right'] {
+body[data-dsh-aemeath] [data-skin-corner='top-right'] {
   top: 6px; right: 6px; border-top-width: 2px; border-right-width: 2px;
 }
 
-body[data-dsh-aimesi] [data-skin-corner='bottom-right'] {
+body[data-dsh-aemeath] [data-skin-corner='bottom-right'] {
   bottom: 6px; right: 6px; border-bottom-width: 2px; border-right-width: 2px;
 }
 
-body[data-dsh-aimesi] [data-skin-corner='bottom-left'] {
+body[data-dsh-aemeath] [data-skin-corner='bottom-left'] {
   bottom: 6px; left: 6px; border-bottom-width: 2px; border-left-width: 2px;
 }
 
 /* ---------- sidebar footer: the heart mark (bow slot) ---------- */
 
-body[data-dsh-aimesi] [data-aimesi-sidebar-footer] {
+body[data-dsh-aemeath] [data-aemeath-sidebar-footer] {
   box-sizing: border-box;
   position: relative;
   padding-top: 168px;
@@ -203,24 +203,24 @@ body[data-dsh-aimesi] [data-aimesi-sidebar-footer] {
    It now stands BEHIND the curtain: a translucent scrim layer sits above the
    figure (but below the settings row), so the silhouette reads as standing
    behind the curtain with only the pink glow bleeding through. */
-body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::before {
+body[data-dsh-aemeath] [data-aemeath-sidebar-footer]::before {
   content: '';
   position: absolute;
   top: 2px;
   left: 0;
   right: 0;
   height: 160px;
-  background: var(--aimesi-sidebar-mark-art) center / contain no-repeat;
+  background: var(--aemeath-sidebar-mark-art) center / contain no-repeat;
   pointer-events: none;
-  filter: drop-shadow(0 0 9px var(--aimesi-glow));
-  animation: aimesiMarkPulse 3.2s ease-in-out infinite;
+  filter: drop-shadow(0 0 9px var(--aemeath-glow));
+  animation: aemeathMarkPulse 3.2s ease-in-out infinite;
   z-index: 0;
 }
 
 /* The curtain in front of the figure: a translucent plum haze laid over the
    mark (but below the settings row) so the Q-version character stands
    behind the curtain — its silhouette dimmed yet visible through the scrim. */
-body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::after {
+body[data-dsh-aemeath] [data-aemeath-sidebar-footer]::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -233,23 +233,23 @@ body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::after {
   z-index: 1;
 }
 
-@keyframes aimesiMarkPulse {
+@keyframes aemeathMarkPulse {
   0%, 100% {
-    filter: drop-shadow(0 0 9px var(--aimesi-glow));
+    filter: drop-shadow(0 0 9px var(--aemeath-glow));
   }
   50% {
     filter: drop-shadow(0 0 18px rgba(255, 79, 163, 0.85));
   }
 }
 
-body[data-dsh-aimesi] [data-aimesi-sidebar-footer] [data-slot='sidebar.settings'] {
+body[data-dsh-aemeath] [data-aemeath-sidebar-footer] [data-slot='sidebar.settings'] {
   position: relative;
   z-index: 2;
 }
 
 /* ---------- top trim: the pink circuit line along the top edge ---------- */
 
-body[data-dsh-aimesi] [data-skin-chrome='top-trim'] {
+body[data-dsh-aemeath] [data-skin-chrome='top-trim'] {
   position: fixed;
   inset: 0 0 auto;
   z-index: 19;
@@ -258,10 +258,10 @@ body[data-dsh-aimesi] [data-skin-chrome='top-trim'] {
   background-image:
     repeating-linear-gradient(
       90deg,
-      var(--aimesi-pink-500) 0 16px,
+      var(--aemeath-pink-500) 0 16px,
       transparent 16px 52px
     ),
-    linear-gradient(180deg, var(--aimesi-pink-600), rgba(255, 79, 163, 0.3));
+    linear-gradient(180deg, var(--aemeath-pink-600), rgba(255, 79, 163, 0.3));
   background-position: center top, center top;
   background-size: 100% 2px, 100% 2px;
   background-repeat: repeat-x, no-repeat;
@@ -271,7 +271,7 @@ body[data-dsh-aimesi] [data-skin-chrome='top-trim'] {
 /* ---------- composer heart: the input box's top edge passes through its
    center (half in, half out), horizontally centered on the box ---------- */
 
-body[data-dsh-aimesi] [data-skin-chrome='composer-heart'] {
+body[data-dsh-aemeath] [data-skin-chrome='composer-heart'] {
   position: absolute;
   /* 76px tall box: 38px above the top edge, 38px overlapping into the card,
      so the card's top border line crosses the heart's exact middle. */
@@ -282,17 +282,17 @@ body[data-dsh-aimesi] [data-skin-chrome='composer-heart'] {
   z-index: 1;
   pointer-events: none;
   transform: translateX(-50%);
-  background: var(--aimesi-raster-heart-art) center / contain no-repeat;
+  background: var(--aemeath-raster-heart-art) center / contain no-repeat;
   filter:
-    drop-shadow(0 0 12px var(--aimesi-glow))
+    drop-shadow(0 0 12px var(--aemeath-glow))
     drop-shadow(0 4px 10px rgba(24, 8, 36, 0.4));
-  animation: aimesiHeartPulse 3.2s ease-in-out infinite;
+  animation: aemeathHeartPulse 3.2s ease-in-out infinite;
 }
 
-@keyframes aimesiHeartPulse {
+@keyframes aemeathHeartPulse {
   0%, 100% {
     filter:
-      drop-shadow(0 0 9px var(--aimesi-glow))
+      drop-shadow(0 0 9px var(--aemeath-glow))
       drop-shadow(0 4px 10px rgba(24, 8, 36, 0.4));
   }
   50% {
@@ -304,40 +304,40 @@ body[data-dsh-aimesi] [data-skin-chrome='composer-heart'] {
 
 /* ---------- bottom trim: the pink signal line ---------- */
 
-body[data-dsh-aimesi] [data-skin-chrome='bottom-trim'] {
+body[data-dsh-aemeath] [data-skin-chrome='bottom-trim'] {
   position: fixed;
   inset: auto 0 0 0;
-  translate: var(--aimesi-sidebar-width) 0;
+  translate: var(--aemeath-sidebar-width) 0;
   z-index: 19;
   height: 40px;
   pointer-events: none;
   transition: transform 520ms cubic-bezier(0.4, 0, 0.2, 1);
   background:
-    linear-gradient(180deg, rgba(255, 79, 163, 0.3), var(--aimesi-pink-500))
+    linear-gradient(180deg, rgba(255, 79, 163, 0.3), var(--aemeath-pink-500))
       center bottom / 100% 2px no-repeat;
 }
 
-body[data-dsh-aimesi][data-aimesi-chat-active] [data-skin-chrome='bottom-trim'] {
+body[data-dsh-aemeath][data-aemeath-chat-active] [data-skin-chrome='bottom-trim'] {
   transform: translateY(100%);
 }
 
 /* ---------- conversation companion: character mark at the top-right ---------- */
 
-body[data-dsh-aimesi] [data-skin-chrome='conversation-mark'] {
+body[data-dsh-aemeath] [data-skin-chrome='conversation-mark'] {
   position: fixed;
   top: 76px;
   right: 20px;
   width: 132px;
   z-index: 18;
   pointer-events: none;
-  background: var(--aimesi-chat-mark-art) center / contain no-repeat;
+  background: var(--aemeath-chat-mark-art) center / contain no-repeat;
   filter:
-    drop-shadow(0 0 14px var(--aimesi-glow))
+    drop-shadow(0 0 14px var(--aemeath-glow))
     drop-shadow(0 6px 14px rgba(24, 8, 36, 0.35));
   opacity: 0.95;
 }
 
-body[data-dsh-aimesi] [data-skin-chrome='conversation-mark']::after {
+body[data-dsh-aemeath] [data-skin-chrome='conversation-mark']::after {
   content: '';
   display: block;
   /* Reserve the figure's aspect ratio (480:449) so the box keeps its shape. */
@@ -346,7 +346,7 @@ body[data-dsh-aimesi] [data-skin-chrome='conversation-mark']::after {
 
 /* ---------- composer: pink glass plate with mecha corner brackets ---------- */
 
-body[data-dsh-aimesi] [data-composer-card] {
+body[data-dsh-aemeath] [data-composer-card] {
   position: relative;
   /* Clearance for the straddling heart: its 38px overlap lives inside this
      48px padding zone, so the first input row starts 10px below the mark
@@ -355,50 +355,50 @@ body[data-dsh-aimesi] [data-composer-card] {
   border: 1px solid rgba(236, 90, 157, 0.35);
   border-radius: 12px;
   background: linear-gradient(180deg, rgba(255, 250, 253, 0.96), rgba(253, 240, 249, 0.94));
-  box-shadow: var(--aimesi-shadow-light), inset 0 1px rgba(255, 255, 255, 0.7);
+  box-shadow: var(--aemeath-shadow-light), inset 0 1px rgba(255, 255, 255, 0.7);
 }
 
 /* Input area: no internal scrollbar — the box grows with the content.
    The app caps [data-input-scroll] at --dsh-composer-text-max-height and
    scrolls beyond it; lifting the cap removes the slider logic entirely
    (the caret-reveal JS no-ops once nothing scrolls). */
-body[data-dsh-aimesi] [data-composer-card] [data-input-scroll] {
+body[data-dsh-aemeath] [data-composer-card] [data-input-scroll] {
   max-height: none;
   overflow-y: visible;
 }
 
 /* The generous starting size only belongs to the new-session (hero) screen;
    the ordinary conversation composer stays at its natural compact size. */
-body[data-dsh-aimesi] [data-phase='hero'] [data-input-scroll] {
+body[data-dsh-aemeath] [data-phase='hero'] [data-input-scroll] {
   min-height: 110px;
 }
 
-body[data-dsh-aimesi] [data-composer-card] textarea {
+body[data-dsh-aemeath] [data-composer-card] textarea {
   line-height: 1.6;
 }
 
-body[data-dsh-aimesi] [data-composer-card]:focus-within {
+body[data-dsh-aemeath] [data-composer-card]:focus-within {
   border-color: rgba(240, 74, 151, 0.75);
   box-shadow:
-    var(--aimesi-shadow-light),
+    var(--aemeath-shadow-light),
     0 0 0 1px rgba(240, 74, 151, 0.28),
     0 0 26px rgba(255, 79, 163, 0.22);
 }
 
-body[data-dsh-aimesi] [data-composer-card]::before,
-body[data-dsh-aimesi] [data-composer-card]::after {
+body[data-dsh-aemeath] [data-composer-card]::before,
+body[data-dsh-aemeath] [data-composer-card]::after {
   content: '';
   position: absolute;
   width: 18px;
   height: 18px;
-  border: 2px solid var(--aimesi-pink-500);
+  border: 2px solid var(--aemeath-pink-500);
   pointer-events: none;
   z-index: 1;
   opacity: 0.85;
-  filter: drop-shadow(0 0 4px var(--aimesi-glow));
+  filter: drop-shadow(0 0 4px var(--aemeath-glow));
 }
 
-body[data-dsh-aimesi] [data-composer-card]::before {
+body[data-dsh-aemeath] [data-composer-card]::before {
   top: -6px;
   left: -6px;
   border-right: none;
@@ -406,7 +406,7 @@ body[data-dsh-aimesi] [data-composer-card]::before {
   border-top-left-radius: 8px;
 }
 
-body[data-dsh-aimesi] [data-composer-card]::after {
+body[data-dsh-aemeath] [data-composer-card]::after {
   bottom: -6px;
   right: -6px;
   border-left: none;
@@ -414,48 +414,48 @@ body[data-dsh-aimesi] [data-composer-card]::after {
   border-bottom-right-radius: 8px;
 }
 
-body[data-dsh-aimesi][data-ds-dark-theme] [data-composer-card] {
+body[data-dsh-aemeath][data-ds-dark-theme] [data-composer-card] {
   background: linear-gradient(180deg, rgba(44, 29, 66, 0.94), rgba(28, 19, 44, 0.92));
-  box-shadow: var(--aimesi-shadow-dark), inset 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: var(--aemeath-shadow-dark), inset 0 1px rgba(255, 255, 255, 0.08);
 }
 
 /* ---------- new-session control ---------- */
 
-body[data-dsh-aimesi] button[class*='newSession'] {
+body[data-dsh-aemeath] button[class*='newSession'] {
   border: 1px solid rgba(217, 58, 132, 0.42);
   border-radius: 10px;
   background: rgba(255, 250, 253, 0.86);
   color: #c23b7e;
 }
 
-body[data-dsh-aimesi] button[class*='newSession']:hover {
+body[data-dsh-aemeath] button[class*='newSession']:hover {
   background: rgba(255, 214, 233, 0.95);
   border-color: rgba(217, 58, 132, 0.7);
 }
 
-body[data-dsh-aimesi] button[class*='newSession'] svg {
+body[data-dsh-aemeath] button[class*='newSession'] svg {
   color: #e8438e;
   stroke-width: 1.8;
 }
 
-body[data-dsh-aimesi][data-ds-dark-theme] button[class*='newSession'] {
+body[data-dsh-aemeath][data-ds-dark-theme] button[class*='newSession'] {
   border-color: rgba(255, 111, 177, 0.38);
   background: rgba(44, 29, 66, 0.88);
   color: #ff9cc9;
 }
 
-body[data-dsh-aimesi][data-ds-dark-theme] button[class*='newSession']:hover {
+body[data-dsh-aemeath][data-ds-dark-theme] button[class*='newSession']:hover {
   background: rgba(58, 36, 86, 0.95);
   border-color: rgba(255, 111, 177, 0.7);
 }
 
-body[data-dsh-aimesi][data-ds-dark-theme] button[class*='newSession'] svg {
+body[data-dsh-aemeath][data-ds-dark-theme] button[class*='newSession'] svg {
   color: #ff7fb8;
 }
 
 /* ---------- workspace tabs: a soft signal glow on the active tab ---------- */
 
-body[data-dsh-aimesi] header [role='tablist'] [aria-selected='true'] {
+body[data-dsh-aemeath] header [role='tablist'] [aria-selected='true'] {
   color: var(--dsw-alias-brand-primary);
   text-shadow: 0 0 14px rgba(255, 111, 177, 0.45);
 }
@@ -463,12 +463,12 @@ body[data-dsh-aimesi] header [role='tablist'] [aria-selected='true'] {
 /* ---------- motion preference ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  body[data-dsh-aimesi] [data-skin-chrome='composer-heart'],
-  body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::before {
+  body[data-dsh-aemeath] [data-skin-chrome='composer-heart'],
+  body[data-dsh-aemeath] [data-aemeath-sidebar-footer]::before {
     animation: none;
   }
 
-  body[data-dsh-aimesi] [data-skin-chrome='bottom-trim'] {
+  body[data-dsh-aemeath] [data-skin-chrome='bottom-trim'] {
     transition: none;
   }
 }

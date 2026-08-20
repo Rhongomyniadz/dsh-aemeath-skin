@@ -1,26 +1,23 @@
-# dsh-aimesi-skin · 爱弥斯
+# dsh-aemeath-skin · 爱弥斯
 
-DeepSeek Harness Web GUI 的粉丝向皮肤：**爱弥斯（鸣潮）粉色机娘主题**。
+DeepSeek Harness Web GUI 皮肤：**爱弥斯主题**。
 
-- 对话区背景：`assets/chat.webp`（来自用户指定的 JPG）
-- 侧栏背景：`assets/sidebar.webp`（来自用户指定的 PNG）
-- 输入框上方与侧栏底部的蝴蝶结位置 → 爱心形声痕（呼吸发光）
-- 粉色主色 + 深莓紫玻璃面板 + 电光粉信号线 + HUD 角标（隧者机兵风）
+- 对话区背景：`assets/chat.webp`
+- 侧栏背景：`assets/sidebar.webp`
+- 粉色主色 + 深莓紫玻璃面板 + 电光粉信号线 + HUD 角标
 
 ## 安装
 
 ```sh
 cd <harness>
-dsh plugin --profile web add /path/to/dsh-aimesi-skin
+dsh plugin --profile web add /path/to/dsh-aemeath-skin
 ```
 
 重启 `dsh web` 后，在 profile 与 home 两个 patch 层中：
 
 ```yaml
-- id: ui-skin-aimesi
+- id: ui-skin-aemeath
   disabled: false
-- id: ui-skin-maid-atelier
-  disabled: true   # 若同时装了女仆皮肤，保持同一时间只启用一套
 ```
 
 ## 素材与构建
