@@ -20,6 +20,12 @@ const SKIN_SYSTEM_CHROME_COLOR = '#1e1430'
 const SIDEBAR_COLUMN_SELECTOR = ":is([data-pane='sidebar'], [class*='sidebarCol'])"
 const ACTIVE_CHAT_SELECTOR = "[data-phase='active'] [data-chat-flow]"
 const COMPOSER_CARD_SELECTOR = "[data-phase='hero'] [data-composer-card], [data-phase='active'] [data-composer-card]"
+const AGENT_RUNNING_SELECTOR = "[data-chat-flow] [class*='_turnStatus'], [data-composer-card] button[class*='_primary'] svg rect"
+const AGENT_STATUS_TEXT = {
+  online: 'Aemeath online',
+  accessing: 'Accessing terminal...',
+  running: 'Resonating...',
+}
 const ART_SLOT_PROPERTIES = [
   '--aemeath-chat-art',
   '--aemeath-raster-heart-art',
@@ -42,6 +48,67 @@ function createHudCorners() {
   return corners
 }
 
+/** Small brand signature that complements the host-owned wordmark. */
+function createSidebarSignature() {
+  const signature = document.createElement('span')
+  signature.dataset.skinChrome = 'sidebar-signature'
+  signature.dataset.skinOwner = SKIN_OWNER
+  signature.setAttribute('aria-hidden', 'true')
+  signature.textContent = 'AEMEATH'
+  return signature
+}
+
+/** Live region displayed below the sidebar character. */
+function createAgentStatus() {
+  const status = document.createElement('div')
+  status.dataset.skinChrome = 'agent-status'
+  status.dataset.skinOwner = SKIN_OWNER
+  status.setAttribute('role', 'status')
+  status.setAttribute('aria-live', 'polite')
+  status.textContent = AGENT_STATUS_TEXT.online
+  return status
+}
+
+/** Toggle used by the assistant theme panel. */
+function createAssistantToggle(label, pressed) {
+  const button = document.createElement('button')
+  button.type = 'button'
+  button.dataset.assistantToggle = ''
+  button.setAttribute('aria-pressed', String(pressed))
+  button.textContent = label
+  return button
+}
+
+/** Theme controls opened from the companion character. */
+function createAssistantPanel() {
+  const panel = document.createElement('section')
+  panel.dataset.skinChrome = 'assistant-panel'
+  panel.dataset.skinOwner = SKIN_OWNER
+  panel.setAttribute('aria-label', 'Aemeath theme controls')
+  panel.hidden = true
+
+  const title = document.createElement('div')
+  title.dataset.assistantPanelTitle = ''
+  title.textContent = 'AEMEATH'
+
+  const intensityControl = document.createElement('label')
+  intensityControl.dataset.assistantControl = ''
+  intensityControl.textContent = 'Theme intensity'
+  const intensity = document.createElement('input')
+  intensity.type = 'range'
+  intensity.min = '0.55'
+  intensity.max = '1'
+  intensity.step = '0.05'
+  intensity.value = '0.9'
+  intensity.setAttribute('aria-label', 'Theme intensity')
+  intensityControl.append(intensity)
+
+  const dim = createAssistantToggle('Background dim', false)
+  const particles = createAssistantToggle('Particle effects', true)
+  panel.append(title, intensityControl, dim, particles)
+  return { panel, intensity, dim, particles }
+}
+
 /**
  * Apply the pink mecha skin: wallpapers with a legibility scrim, the heart
  * tacet marks (composer + sidebar), HUD chrome and state projection. Every
@@ -55,6 +122,7 @@ function apply(ctx) {
   const previousProperties = new Map()
   for (const property of [
     '--aemeath-sidebar-width',
+    '--aemeath-effects-opacity',
     ...ART_SLOT_PROPERTIES,
   ]) {
     previousProperties.set(property, body.style.getPropertyValue(property))
@@ -68,14 +136,29 @@ function apply(ctx) {
   let themeColorMeta = null
   let previousThemeColor = undefined
   let themeColorObserver = undefined
+  let agentStatus = undefined
+  let currentAgentState = undefined
+  let completionTimer = undefined
+  let conversationMark = undefined
+  let assistantPanel = undefined
+  let onDocumentPointerDown = undefined
+  let onDocumentKeyDown = undefined
 
   ctx.effect(() => () => {
     delete body.dataset.dshAemeath
     delete body.dataset.aemeathChatActive
     delete body.dataset.aemeathSidebarSize
+    delete body.dataset.aemeathAgentState
+    delete body.dataset.aemeathCompleted
+    delete body.dataset.aemeathAssistantOpen
+    delete body.dataset.aemeathDim
+    delete body.dataset.aemeathParticlesOff
     observer?.disconnect()
     themeColorObserver?.disconnect()
     resizeObserver?.disconnect()
+    if (completionTimer !== undefined) window.clearTimeout(completionTimer)
+    if (onDocumentPointerDown !== undefined) document.removeEventListener('pointerdown', onDocumentPointerDown)
+    if (onDocumentKeyDown !== undefined) document.removeEventListener('keydown', onDocumentKeyDown)
     for (const [property, value] of previousProperties) {
       body.style.setProperty(property, value)
     }
@@ -135,9 +218,26 @@ function apply(ctx) {
         if (footer.querySelector("[data-slot='sidebar.footer.action']")) {
           footer.dataset.aemeathSidebarFooter = ''
           decoratedElements.add(footer)
+          const existingStatus = footer.querySelector("[data-skin-chrome='agent-status']")
+          if (existingStatus !== null) {
+            agentStatus = existingStatus
+          } else {
+            agentStatus = createAgentStatus()
+            ownedNodes.add(agentStatus)
+            footer.append(agentStatus)
+          }
           break
         }
         footer = footer.parentElement
+      }
+    }
+
+    if (!sidebar.querySelector("[data-skin-chrome='sidebar-signature']")) {
+      const brand = sidebar.querySelector("[class*='_logoRow'] [class*='_brand']")
+      if (brand !== null) {
+        const signature = createSidebarSignature()
+        ownedNodes.add(signature)
+        brand.append(signature)
       }
     }
 
@@ -173,6 +273,29 @@ function apply(ctx) {
     body.toggleAttribute('data-aemeath-chat-active', document.querySelector(ACTIVE_CHAT_SELECTOR) !== null)
   }
 
+  /** Project stable host DOM state into the character and composer core. */
+  const syncAgentState = () => {
+    const input = document.querySelector('[data-composer-card] textarea[data-phase]')
+    const phase = input?.getAttribute('data-phase')
+    const nextState = phase === 'adjudicating' || phase === 'submitting'
+      ? 'accessing'
+      : document.querySelector(AGENT_RUNNING_SELECTOR) !== null
+        ? 'running'
+        : 'online'
+    const completed = (currentAgentState === 'running' || currentAgentState === 'accessing')
+      && nextState === 'online'
+    currentAgentState = nextState
+    body.dataset.aemeathAgentState = nextState
+    if (agentStatus?.isConnected) agentStatus.textContent = AGENT_STATUS_TEXT[nextState]
+    if (!completed) return
+    body.dataset.aemeathCompleted = ''
+    if (completionTimer !== undefined) window.clearTimeout(completionTimer)
+    completionTimer = window.setTimeout(() => {
+      delete body.dataset.aemeathCompleted
+      completionTimer = undefined
+    }, 820)
+  }
+
   // Composer heart: structurally bound to the input box. The node lives as a
   // child of the composer card and the stylesheet pins it to `bottom: 100%`,
   // so the browser keeps it glued to the card's top edge through every phase
@@ -185,12 +308,51 @@ function apply(ctx) {
 
   // Conversation companion: the character mark floats at the top-right of the
   // conversation panel, above the wallpaper but below dialogs.
-  const conversationMark = document.createElement('div')
+  conversationMark = document.createElement('button')
+  conversationMark.type = 'button'
   conversationMark.dataset.skinChrome = 'conversation-mark'
   conversationMark.dataset.skinOwner = SKIN_OWNER
-  conversationMark.setAttribute('aria-hidden', 'true')
+  conversationMark.setAttribute('aria-label', 'Open Aemeath theme controls')
+  conversationMark.setAttribute('aria-expanded', 'false')
   ownedNodes.add(conversationMark)
   body.append(conversationMark)
+
+  const controls = createAssistantPanel()
+  assistantPanel = controls.panel
+  ownedNodes.add(assistantPanel)
+  body.append(assistantPanel)
+
+  const setAssistantOpen = (open) => {
+    body.toggleAttribute('data-aemeath-assistant-open', open)
+    conversationMark.setAttribute('aria-expanded', String(open))
+    assistantPanel.hidden = !open
+  }
+  conversationMark.addEventListener('click', () => {
+    setAssistantOpen(conversationMark.getAttribute('aria-expanded') !== 'true')
+  })
+  controls.intensity.addEventListener('input', () => {
+    body.style.setProperty('--aemeath-effects-opacity', controls.intensity.value)
+  })
+  controls.dim.addEventListener('click', () => {
+    const enabled = controls.dim.getAttribute('aria-pressed') !== 'true'
+    controls.dim.setAttribute('aria-pressed', String(enabled))
+    body.toggleAttribute('data-aemeath-dim', enabled)
+  })
+  controls.particles.addEventListener('click', () => {
+    const enabled = controls.particles.getAttribute('aria-pressed') !== 'true'
+    controls.particles.setAttribute('aria-pressed', String(enabled))
+    body.toggleAttribute('data-aemeath-particles-off', !enabled)
+  })
+  onDocumentPointerDown = (event) => {
+    if (conversationMark.getAttribute('aria-expanded') !== 'true') return
+    if (event.target instanceof Node && (conversationMark.contains(event.target) || assistantPanel.contains(event.target))) return
+    setAssistantOpen(false)
+  }
+  onDocumentKeyDown = (event) => {
+    if (event.key === 'Escape') setAssistantOpen(false)
+  }
+  document.addEventListener('pointerdown', onDocumentPointerDown)
+  document.addEventListener('keydown', onDocumentKeyDown)
 
   const decorateComposer = () => {
     const card = document.querySelector(COMPOSER_CARD_SELECTOR)
@@ -199,11 +361,6 @@ function apply(ctx) {
     card.append(composerHeart)
   }
 
-  decorateSidebar()
-  ensureSidebarObserved()
-  syncChatState()
-  decorateComposer()
-
   if (typeof ResizeObserver !== 'undefined') {
     resizeObserver = new ResizeObserver((entries) => {
       const entry = entries.at(-1)
@@ -211,6 +368,12 @@ function apply(ctx) {
       applySidebarWidth(entry.contentRect.width)
     })
   }
+
+  decorateSidebar()
+  ensureSidebarObserved()
+  syncChatState()
+  decorateComposer()
+  syncAgentState()
 
   const initialSidebar = document.querySelector(SIDEBAR_COLUMN_SELECTOR)
   if (initialSidebar) applySidebarWidth(initialSidebar.getBoundingClientRect().width)
@@ -225,13 +388,18 @@ function apply(ctx) {
     let sidebarChanged = false
     let phaseChanged = false
     let composerChanged = false
+    let agentStateChanged = false
     for (const record of records) {
       if (record.type === 'attributes') {
-        if (record.attributeName === 'data-phase') phaseChanged = true
+        if (record.attributeName === 'data-phase') {
+          phaseChanged = true
+          agentStateChanged = true
+        }
         continue
       }
       const appNodes = [...record.addedNodes, ...record.removedNodes]
         .filter(node => node instanceof Element && !isSkinChrome(node))
+      if (appNodes.length > 0) agentStateChanged = true
       if (appNodes.some(node => (
         node.matches(SIDEBAR_COLUMN_SELECTOR)
         || node.querySelector(SIDEBAR_COLUMN_SELECTOR) !== null
@@ -256,6 +424,7 @@ function apply(ctx) {
       const sidebar = document.querySelector(SIDEBAR_COLUMN_SELECTOR)
       if (sidebar) applySidebarWidth(sidebar.getBoundingClientRect().width)
     }
+    if (agentStateChanged) syncAgentState()
   })
   observer.observe(body, {
     attributes: true,
