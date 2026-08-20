@@ -21,33 +21,35 @@ body[data-dsh-aemeath] {
   background-attachment: scroll, scroll;
   background-repeat: no-repeat, no-repeat;
 
-  --aemeath-pink-200: #ffd9eb;
-  --aemeath-pink-300: #ffb9dd;
-  --aemeath-pink-400: #ff9dd3;
-  --aemeath-pink-500: #ff69b7;
-  --aemeath-pink-600: #f24c9e;
-  --aemeath-pink-700: #d93a84;
-  --aemeath-cyan: #77e8ff;
-  --aemeath-violet: #8e72ff;
+  --aemeath-theme-intensity: 0.9;
+  --aemeath-accent-mix: calc(var(--aemeath-theme-intensity) * 100%);
+  --aemeath-pink-200: color-mix(in srgb, #ffd9eb var(--aemeath-accent-mix), #746d7c);
+  --aemeath-pink-300: color-mix(in srgb, #ffb9dd var(--aemeath-accent-mix), #746a7a);
+  --aemeath-pink-400: color-mix(in srgb, #ff9dd3 var(--aemeath-accent-mix), #716777);
+  --aemeath-pink-500: color-mix(in srgb, #ff69b7 var(--aemeath-accent-mix), #6e6475);
+  --aemeath-pink-600: color-mix(in srgb, #f24c9e var(--aemeath-accent-mix), #695f70);
+  --aemeath-pink-700: color-mix(in srgb, #d93a84 var(--aemeath-accent-mix), #625967);
+  --aemeath-cyan: color-mix(in srgb, #77e8ff var(--aemeath-accent-mix), #63777d);
+  --aemeath-violet: color-mix(in srgb, #8e72ff var(--aemeath-accent-mix), #69647d);
   --aemeath-text: #f7f4ff;
   --aemeath-muted: #a8a5bc;
   --aemeath-panel: #111326;
   --aemeath-deep: #080a18;
-  --aemeath-glow: rgba(255, 105, 183, 0.55);
-  --aemeath-cyan-glow: rgba(119, 232, 255, 0.55);
+  --aemeath-glow: rgb(255 105 183 / calc(0.14 + var(--aemeath-theme-intensity) * 0.41));
+  --aemeath-cyan-glow: rgb(119 232 255 / calc(0.14 + var(--aemeath-theme-intensity) * 0.41));
   --aemeath-plum-950: #0d091b;
   --aemeath-plum-900: #111326;
   --aemeath-plum-800: #1a1934;
   --aemeath-plum-700: #28234a;
   --aemeath-steel: #55536e;
   --aemeath-ice: #bdeeff;
-  --aemeath-effects-opacity: 0.92;
+  --aemeath-effects-opacity: var(--aemeath-theme-intensity);
   --aemeath-sidebar-width: 280px;
   --aemeath-backdrop-scrim: linear-gradient(
     90deg,
-    rgba(239, 238, 251, 0.72) 0%,
-    rgba(244, 241, 252, 0.52) 48%,
-    rgba(236, 235, 249, 0.6) 100%
+    rgb(239 238 251 / calc(1 - var(--aemeath-theme-intensity) * 0.28)) 0%,
+    rgb(244 241 252 / calc(1 - var(--aemeath-theme-intensity) * 0.48)) 48%,
+    rgb(236 235 249 / calc(1 - var(--aemeath-theme-intensity) * 0.4)) 100%
   );
   --aemeath-shadow-light: 0 18px 54px rgba(41, 29, 78, 0.18), 0 2px 8px rgba(118, 43, 91, 0.12);
   --aemeath-shadow-dark: 0 18px 58px rgba(0, 0, 0, 0.42), 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -92,9 +94,9 @@ body[data-dsh-aemeath][data-ds-dark-theme] {
 
   --aemeath-backdrop-scrim: linear-gradient(
     90deg,
-    rgba(7, 11, 30, 0.72) 0%,
-    rgba(7, 11, 30, 0.49) 48%,
-    rgba(7, 11, 30, 0.6) 100%
+    rgb(7 11 30 / calc(1 - var(--aemeath-theme-intensity) * 0.28)) 0%,
+    rgb(7 11 30 / calc(0.9 - var(--aemeath-theme-intensity) * 0.41)) 48%,
+    rgb(7 11 30 / calc(0.94 - var(--aemeath-theme-intensity) * 0.34)) 100%
   );
   --aemeath-shadow-dark: 0 18px 58px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.36);
   --dsw-alias-bg-base: transparent;
@@ -132,9 +134,9 @@ body[data-dsh-aemeath][data-ds-dark-theme] {
 body[data-dsh-aemeath][data-aemeath-dim] {
   --aemeath-backdrop-scrim: linear-gradient(
     90deg,
-    rgba(7, 11, 30, 0.84) 0%,
-    rgba(7, 11, 30, 0.7) 48%,
-    rgba(7, 11, 30, 0.76) 100%
+    rgb(7 11 30 / calc(1 - var(--aemeath-theme-intensity) * 0.16)) 0%,
+    rgb(7 11 30 / calc(1 - var(--aemeath-theme-intensity) * 0.3)) 48%,
+    rgb(7 11 30 / calc(1 - var(--aemeath-theme-intensity) * 0.24)) 100%
   );
 }
 
@@ -143,7 +145,7 @@ body[data-dsh-aemeath] [id='root'] {
   background: transparent;
 }
 
-/* ---------- sidebar: resonance terminal glass ---------- */
+/* ---------- sidebar: terminal glass ---------- */
 
 body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) {
   position: relative;
@@ -192,6 +194,7 @@ body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol'])::after 
     transparent 98%
   );
   box-shadow: 0 0 12px rgba(142, 114, 255, 0.28);
+  opacity: var(--aemeath-theme-intensity);
   pointer-events: none;
 }
 
@@ -246,7 +249,7 @@ body[data-dsh-aemeath] [data-skin-chrome='sidebar-signature'] {
 }
 
 body[data-dsh-aemeath] [data-skin-chrome='sidebar-signature']::after {
-  content: 'resonance';
+  content: 'interface';
   color: var(--aemeath-cyan);
   font-size: 8px;
   font-weight: 500;
@@ -285,6 +288,7 @@ body[data-dsh-aemeath] [data-aemeath-sidebar-footer]::before {
   background: var(--aemeath-sidebar-mark-art) center / contain no-repeat;
   pointer-events: none;
   filter: drop-shadow(0 0 8px rgba(255, 105, 183, 0.48));
+  opacity: var(--aemeath-effects-opacity);
   animation: aemeathMarkBreathe 4.2s ease-in-out infinite;
   z-index: 0;
 }
@@ -308,7 +312,7 @@ body[data-dsh-aemeath] [data-aemeath-sidebar-footer]::after {
 
 body[data-dsh-aemeath][data-aemeath-agent-state='running'] [data-aemeath-sidebar-footer]::before,
 body[data-dsh-aemeath][data-aemeath-agent-state='accessing'] [data-aemeath-sidebar-footer]::before {
-  animation: aemeathMarkResonating 2.2s ease-in-out infinite;
+  animation: aemeathMarkActive 2.2s ease-in-out infinite;
 }
 
 body[data-dsh-aemeath][data-aemeath-completed] [data-aemeath-sidebar-footer]::before {
@@ -391,20 +395,58 @@ body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) [class*
   color: var(--aemeath-text);
 }
 
+/* The Workspace containing the current session shares the New Session
+   launcher's frame language while preserving the Workspace row geometry. */
+body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) [class*='_projectRow']:has([class*='_folderActive']) {
+  isolation: isolate;
+  border-color: transparent;
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 157, 211, 0.14), transparent 22%) padding-box,
+    radial-gradient(circle at 88% 82%, rgba(119, 232, 255, 0.11), transparent 24%) padding-box,
+    repeating-linear-gradient(115deg, transparent 0 13px, rgba(255, 255, 255, 0.018) 13px 14px) padding-box,
+    linear-gradient(145deg, rgba(17, 14, 38, 0.98), rgba(9, 11, 29, 0.96)) padding-box,
+    linear-gradient(105deg, var(--aemeath-pink-500), var(--aemeath-violet) 58%, var(--aemeath-cyan)) border-box;
+  clip-path: polygon(0 7px, 7px 0, calc(100% - 7px) 0, 100% 7px, 100% calc(100% - 7px), calc(100% - 7px) 100%, 7px 100%, 0 calc(100% - 7px));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    inset 0 0 18px rgba(255, 105, 183, 0.055),
+    0 0 12px rgba(142, 114, 255, 0.08);
+  color: var(--aemeath-text);
+}
+
+body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) [class*='_projectRow']:has([class*='_folderActive']):hover,
+body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) [class*='_projectRow'][class*='_menuOpen']:has([class*='_folderActive']) {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 157, 211, 0.2), transparent 24%) padding-box,
+    radial-gradient(circle at 88% 82%, rgba(119, 232, 255, 0.16), transparent 26%) padding-box,
+    repeating-linear-gradient(115deg, transparent 0 13px, rgba(255, 255, 255, 0.025) 13px 14px) padding-box,
+    linear-gradient(145deg, rgba(23, 16, 45, 0.98), rgba(10, 15, 35, 0.97)) padding-box,
+    linear-gradient(105deg, var(--aemeath-pink-400), var(--aemeath-violet) 58%, var(--aemeath-cyan)) border-box;
+  box-shadow:
+    inset 0 0 22px rgba(255, 105, 183, 0.075),
+    0 0 16px rgba(255, 105, 183, 0.12);
+}
+
+body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) [class*='_projectRow']:has([class*='_folderActive']) [class*='_folderActive'] {
+  color: var(--aemeath-pink-400);
+  filter: drop-shadow(0 0 6px rgba(255, 105, 183, 0.48));
+}
+
 @keyframes aemeathMarkBreathe {
   0%, 100% {
-    opacity: 0.88;
+    opacity: calc(var(--aemeath-effects-opacity) * 0.88);
     transform: translateY(0);
     filter: drop-shadow(0 0 8px rgba(255, 105, 183, 0.42));
   }
   50% {
-    opacity: 1;
+    opacity: var(--aemeath-effects-opacity);
     transform: translateY(-1px);
     filter: drop-shadow(0 0 13px rgba(255, 105, 183, 0.58));
   }
 }
 
-@keyframes aemeathMarkResonating {
+@keyframes aemeathMarkActive {
   0%, 100% {
     transform: translateY(0);
     filter:
@@ -539,6 +581,7 @@ body[data-dsh-aemeath] [data-skin-chrome='composer-heart'] {
   filter:
     drop-shadow(0 0 12px var(--aemeath-glow))
     drop-shadow(0 4px 10px rgba(24, 8, 36, 0.4));
+  opacity: var(--aemeath-effects-opacity);
   animation: aemeathHeartPulse 3.2s ease-in-out infinite;
 }
 
@@ -628,7 +671,7 @@ body[data-dsh-aemeath][data-aemeath-particles-off] [data-skin-chrome='composer-h
   }
 }
 
-/* ---------- bottom trim: low-energy resonance line ---------- */
+/* ---------- bottom trim: low-energy terminal line ---------- */
 
 body[data-dsh-aemeath] [data-skin-chrome='bottom-trim'] {
   position: fixed;
@@ -833,19 +876,27 @@ body[data-dsh-aemeath] [data-phase='active'] [data-composer-seat] {
   background-attachment: fixed, fixed;
 }
 
-/* ---------- composer: the terminal's resonance core ---------- */
+/* ---------- composer: the terminal core ---------- */
 
 body[data-dsh-aemeath] [data-composer-card] {
   position: relative;
+  isolation: isolate;
   padding-top: 48px;
-  border: 1px solid rgba(255, 105, 183, 0.34);
-  border-radius: 10px;
-  background: linear-gradient(160deg, rgba(250, 248, 255, 0.9), rgba(240, 235, 250, 0.84));
+  border: 1px solid rgba(255, 105, 183, 0.54);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% -12%, rgba(255, 105, 183, 0.14), transparent 32%),
+    radial-gradient(circle at 96% 96%, rgba(119, 232, 255, 0.1), transparent 26%),
+    repeating-linear-gradient(115deg, transparent 0 18px, rgba(142, 114, 255, 0.022) 18px 19px),
+    linear-gradient(160deg, rgba(250, 248, 255, 0.94), rgba(235, 231, 248, 0.9));
   box-shadow:
     var(--aemeath-shadow-light),
+    0 0 0 1px rgba(142, 114, 255, 0.08),
     inset 0 1px rgba(255, 255, 255, 0.62),
-    inset 14px 0 36px rgba(255, 105, 183, 0.035);
-  backdrop-filter: blur(18px) saturate(115%);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.055),
+    inset 18px 0 44px rgba(255, 105, 183, 0.055),
+    inset -18px 0 44px rgba(119, 232, 255, 0.035);
+  backdrop-filter: blur(22px) saturate(122%);
   transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
@@ -866,6 +917,30 @@ body[data-dsh-aemeath] [data-phase='hero'] [data-input-scroll] {
 
 body[data-dsh-aemeath] [data-composer-card] textarea {
   line-height: 1.6;
+}
+
+body[data-dsh-aemeath] [data-composer-card] [data-input-backdrop] {
+  color: #242039;
+}
+
+body[data-dsh-aemeath] [data-composer-card] textarea::placeholder {
+  color: #77738e;
+  opacity: 1;
+}
+
+body[data-dsh-aemeath][data-ds-dark-theme] [data-composer-card] [data-input-backdrop] {
+  color: #ebe6f5;
+  text-shadow: 0 1px 8px rgba(8, 10, 24, 0.56);
+}
+
+body[data-dsh-aemeath][data-ds-dark-theme] [data-composer-card] textarea::placeholder {
+  color: #bbb5ca;
+}
+
+body[data-dsh-aemeath] [data-composer-card] > [class*='_row'] {
+  position: relative;
+  border-top: 1px solid rgba(255, 105, 183, 0.1);
+  background: linear-gradient(90deg, rgba(255, 105, 183, 0.025), transparent 32% 68%, rgba(119, 232, 255, 0.02));
 }
 
 body[data-dsh-aemeath] [data-composer-card]:focus-within {
@@ -889,37 +964,147 @@ body[data-dsh-aemeath] [data-composer-card]::before,
 body[data-dsh-aemeath] [data-composer-card]::after {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--aemeath-pink-500);
+  border: 0;
+  border-radius: 0;
   pointer-events: none;
-  z-index: 1;
-  opacity: 0.85;
+  z-index: 2;
   filter: drop-shadow(0 0 4px var(--aemeath-glow));
 }
 
 body[data-dsh-aemeath] [data-composer-card]::before {
-  top: -6px;
-  left: -6px;
-  border-right: none;
-  border-bottom: none;
-  border-top-left-radius: 8px;
+  inset: -5px;
+  background:
+    linear-gradient(var(--aemeath-pink-500), var(--aemeath-pink-500)) left top / 24px 2px no-repeat,
+    linear-gradient(var(--aemeath-pink-500), var(--aemeath-pink-500)) left top / 2px 24px no-repeat,
+    linear-gradient(var(--aemeath-cyan), var(--aemeath-cyan)) right top / 24px 2px no-repeat,
+    linear-gradient(var(--aemeath-cyan), var(--aemeath-cyan)) right top / 2px 24px no-repeat,
+    linear-gradient(var(--aemeath-cyan), var(--aemeath-cyan)) left bottom / 24px 2px no-repeat,
+    linear-gradient(var(--aemeath-cyan), var(--aemeath-cyan)) left bottom / 2px 24px no-repeat,
+    linear-gradient(var(--aemeath-pink-500), var(--aemeath-pink-500)) right bottom / 24px 2px no-repeat,
+    linear-gradient(var(--aemeath-pink-500), var(--aemeath-pink-500)) right bottom / 2px 24px no-repeat;
+  opacity: calc(var(--aemeath-theme-intensity) * 0.92);
 }
 
 body[data-dsh-aemeath] [data-composer-card]::after {
-  bottom: -6px;
-  right: -6px;
-  border-left: none;
-  border-top: none;
-  border-bottom-right-radius: 8px;
+  inset: -1px;
+  background:
+    radial-gradient(circle, var(--aemeath-pink-400) 0 1px, transparent 2px) 14% 100% / 5px 5px no-repeat,
+    radial-gradient(circle, var(--aemeath-cyan) 0 1px, transparent 2px) 86% 0 / 5px 5px no-repeat,
+    linear-gradient(90deg, transparent, rgba(255, 105, 183, 0.74) 18%, rgba(142, 114, 255, 0.5) 46%, transparent 46% 54%, rgba(119, 232, 255, 0.64) 82%, transparent) center top / calc(100% - 54px) 1px no-repeat,
+    linear-gradient(90deg, transparent, rgba(119, 232, 255, 0.54) 18%, rgba(142, 114, 255, 0.42) 46%, transparent 46% 54%, rgba(255, 105, 183, 0.62) 82%, transparent) center bottom / calc(100% - 54px) 1px no-repeat,
+    linear-gradient(180deg, transparent, rgba(119, 232, 255, 0.48), transparent) right 5px center / 1px 38% no-repeat;
+  opacity: calc(var(--aemeath-theme-intensity) * 0.74);
 }
 
 body[data-dsh-aemeath][data-ds-dark-theme] [data-composer-card] {
-  background: linear-gradient(155deg, rgba(17, 19, 38, 0.91), rgba(9, 11, 28, 0.88));
+  background:
+    radial-gradient(circle at 50% -12%, rgba(255, 105, 183, 0.13), transparent 32%),
+    radial-gradient(circle at 96% 96%, rgba(119, 232, 255, 0.08), transparent 26%),
+    repeating-linear-gradient(115deg, transparent 0 18px, rgba(142, 114, 255, 0.024) 18px 19px),
+    linear-gradient(155deg, rgba(17, 19, 38, 0.96), rgba(8, 10, 26, 0.94));
   box-shadow:
     var(--aemeath-shadow-dark),
+    0 0 0 1px rgba(142, 114, 255, 0.08),
     inset 0 1px rgba(255, 255, 255, 0.07),
-    inset 14px 0 36px rgba(255, 105, 183, 0.035);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    inset 18px 0 44px rgba(255, 105, 183, 0.055),
+    inset -18px 0 44px rgba(119, 232, 255, 0.03);
+}
+
+/* Message-flow chrome uses brighter local semantic text over the artwork. */
+body[data-dsh-aemeath] [data-chat-flow] {
+  --dsw-alias-label-secondary: #eeeaf6;
+  --dsw-alias-label-tertiary: #d8d3e2;
+  --dsw-alias-label-caption: #bdb6ca;
+  --dsw-alias-separator-primary: rgba(119, 232, 255, 0.58);
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant]:not([data-variant='think']) > [class*='_row'] {
+  padding-inline: 8px;
+  border-left: 1px solid rgba(119, 232, 255, 0.18);
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(8, 12, 30, 0.72), rgba(12, 14, 34, 0.42) 72%, transparent);
+  text-shadow: 0 1px 7px rgba(0, 0, 0, 0.48);
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant]:not([data-variant='think']) [class*='_title'] {
+  color: #f2eef9;
+  font-weight: 520;
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant]:not([data-variant='think']) :is([class*='_summary'], [class*='_summarySuffix'], [class*='_fileLink']) {
+  color: #d8d3e2;
+  opacity: 1;
+}
+
+/* Thought disclosure: a distinct system-information surface over the art. */
+body[data-dsh-aemeath] [data-chat-flow] [data-variant='think'] {
+  margin-block: 3px;
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant='think'] > [class*='_row'] {
+  padding: 5px 10px;
+  border: 1px solid rgba(119, 232, 255, 0.24);
+  border-left-color: rgba(255, 105, 183, 0.55);
+  border-radius: 7px;
+  background:
+    linear-gradient(90deg, rgba(255, 105, 183, 0.1), rgba(10, 13, 33, 0.96) 20%, rgba(7, 11, 29, 0.93) 78%, rgba(119, 232, 255, 0.08));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    0 5px 16px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(12px) saturate(118%);
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant='think'] [class*='_title'] {
+  color: #f4f0fb;
+  font-weight: 560;
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant='think'] [class*='_summary'] {
+  color: #e7e2ef;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.58);
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant='think'] [class*='_chevron'] {
+  color: var(--aemeath-cyan);
+}
+
+body[data-dsh-aemeath] [data-chat-flow] [data-variant='think'] [class*='_thinkBody'] {
+  margin-top: 4px;
+  padding: 8px 12px 8px 20px;
+  border-left: 1px solid rgba(119, 232, 255, 0.42);
+  border-radius: 0 6px 6px 0;
+  background: linear-gradient(90deg, rgba(8, 12, 30, 0.88), rgba(10, 12, 29, 0.68));
+  color: #ebe6f2;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.58);
+}
+
+/* The footer may arrive through a slot wrapper, so its position relative to
+   the stable composer card is the durable selector. */
+body[data-dsh-aemeath] [data-composer-card] ~ :last-child {
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% - 18px);
+  margin-top: 7px;
+  padding: 4px 14px;
+  border: 1px solid rgba(119, 232, 255, 0.26);
+  border-radius: 7px;
+  background:
+    linear-gradient(90deg, rgba(255, 105, 183, 0.1), rgba(7, 10, 27, 0.96) 18% 82%, rgba(119, 232, 255, 0.09));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.055),
+    0 6px 18px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px) saturate(118%);
+  color: #ebe7f2;
+  text-shadow: 0 1px 7px rgba(0, 0, 0, 0.68);
+}
+
+body[data-dsh-aemeath] [data-composer-card] ~ :last-child :is([class*='_root'], span) {
+  color: inherit;
+}
+
+body[data-dsh-aemeath] [data-composer-card] ~ :last-child span[aria-hidden] {
+  color: rgba(119, 232, 255, 0.72);
 }
 
 /* ---------- composer controls: one shape language ---------- */
@@ -1006,7 +1191,7 @@ body[data-dsh-aemeath] [data-composer-card] :is(button, select):focus-visible {
   }
 }
 
-/* ---------- new-session resonance launcher ---------- */
+/* ---------- new-session terminal launcher ---------- */
 
 body[data-dsh-aemeath] button[class*='newSession'] {
   position: relative;
@@ -1016,11 +1201,17 @@ body[data-dsh-aemeath] button[class*='newSession'] {
   border: 1px solid transparent;
   border-radius: 0;
   background:
-    linear-gradient(rgba(12, 14, 32, 0.96), rgba(12, 14, 32, 0.96)) padding-box,
+    radial-gradient(circle at 12% 18%, rgba(255, 157, 211, 0.15), transparent 22%) padding-box,
+    radial-gradient(circle at 88% 82%, rgba(119, 232, 255, 0.12), transparent 24%) padding-box,
+    repeating-linear-gradient(115deg, transparent 0 13px, rgba(255, 255, 255, 0.019) 13px 14px) padding-box,
+    linear-gradient(145deg, rgba(17, 14, 38, 0.98), rgba(9, 11, 29, 0.96)) padding-box,
     linear-gradient(105deg, var(--aemeath-pink-500), var(--aemeath-violet) 58%, var(--aemeath-cyan)) border-box;
   color: var(--aemeath-text);
   clip-path: polygon(0 9px, 9px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 8px 100%, 0 calc(100% - 8px));
-  box-shadow: inset 0 0 22px rgba(255, 105, 183, 0.035);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    inset 0 0 22px rgba(255, 105, 183, 0.055),
+    0 0 12px rgba(142, 114, 255, 0.08);
   font-size: 12px;
   font-weight: 650;
   letter-spacing: 0.1em;
@@ -1031,7 +1222,10 @@ body[data-dsh-aemeath] button[class*='newSession'] {
 
 body[data-dsh-aemeath] button[class*='newSession']:hover {
   background:
-    linear-gradient(rgba(15, 16, 37, 0.94), rgba(15, 16, 37, 0.94)) padding-box,
+    radial-gradient(circle at 12% 18%, rgba(255, 157, 211, 0.21), transparent 24%) padding-box,
+    radial-gradient(circle at 88% 82%, rgba(119, 232, 255, 0.17), transparent 26%) padding-box,
+    repeating-linear-gradient(115deg, transparent 0 13px, rgba(255, 255, 255, 0.026) 13px 14px) padding-box,
+    linear-gradient(145deg, rgba(23, 16, 45, 0.98), rgba(10, 15, 35, 0.97)) padding-box,
     linear-gradient(105deg, var(--aemeath-pink-400), var(--aemeath-violet) 58%, var(--aemeath-cyan)) border-box;
   box-shadow:
     inset 0 0 24px rgba(255, 105, 183, 0.08),
@@ -1058,7 +1252,7 @@ body[data-dsh-aemeath] button[class*='newSession']:hover::before {
 }
 
 body[data-dsh-aemeath] button[class*='newSession']::after {
-  content: 'start resonance';
+  content: 'system ready';
   position: absolute;
   right: 0;
   bottom: 5px;
@@ -1164,8 +1358,17 @@ body[data-dsh-aemeath] button[class*='_toBottom']:hover {
 }
 
 body[data-dsh-aemeath] [class*='_turnStatus'] {
-  background: linear-gradient(90deg, var(--aemeath-cyan), #f4fdff 48%, var(--aemeath-violet)) !important;
+  background-image: linear-gradient(90deg, var(--aemeath-cyan), #f4fdff 48%, var(--aemeath-violet)) !important;
   background-size: 250% 100% !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+body[data-dsh-aemeath] [class*='_turnStatus'] [class*='_turnStatusClock'] {
+  color: #d8d3e2 !important;
+  -webkit-text-fill-color: #d8d3e2 !important;
 }
 
 /* ---------- motion preference ---------- */

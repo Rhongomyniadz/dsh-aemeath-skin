@@ -24,7 +24,7 @@ const AGENT_RUNNING_SELECTOR = "[data-chat-flow] [class*='_turnStatus'], [data-c
 const AGENT_STATUS_TEXT = {
   online: 'Aemeath online',
   accessing: 'Accessing terminal...',
-  running: 'Resonating...',
+  running: 'Aemeath active...',
 }
 const ART_SLOT_PROPERTIES = [
   '--aemeath-chat-art',
@@ -103,7 +103,7 @@ function createAssistantPanel() {
   intensity.setAttribute('aria-label', 'Theme intensity')
   intensityControl.append(intensity)
 
-  const dim = createAssistantToggle('Background dim', false)
+  const dim = createAssistantToggle('Background dim', true)
   const particles = createAssistantToggle('Particle effects', true)
   panel.append(title, intensityControl, dim, particles)
   return { panel, intensity, dim, particles }
@@ -122,7 +122,7 @@ function apply(ctx) {
   const previousProperties = new Map()
   for (const property of [
     '--aemeath-sidebar-width',
-    '--aemeath-effects-opacity',
+    '--aemeath-theme-intensity',
     ...ART_SLOT_PROPERTIES,
   ]) {
     previousProperties.set(property, body.style.getPropertyValue(property))
@@ -173,6 +173,7 @@ function apply(ctx) {
   }, 'ui-skin-aemeath: pink mecha skin')
 
   body.dataset.dshAemeath = ''
+  body.dataset.aemeathDim = ''
 
   // Artwork slots consumed by the stylesheet. The stylesheet owns every
   // background layer (scrim + wallpaper) so light/dark switching re-tints the
@@ -331,7 +332,7 @@ function apply(ctx) {
     setAssistantOpen(conversationMark.getAttribute('aria-expanded') !== 'true')
   })
   controls.intensity.addEventListener('input', () => {
-    body.style.setProperty('--aemeath-effects-opacity', controls.intensity.value)
+    body.style.setProperty('--aemeath-theme-intensity', controls.intensity.value)
   })
   controls.dim.addEventListener('click', () => {
     const enabled = controls.dim.getAttribute('aria-pressed') !== 'true'
