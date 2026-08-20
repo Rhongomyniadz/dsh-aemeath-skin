@@ -126,7 +126,7 @@ body[data-dsh-aimesi] [id='root'] {
   background: transparent;
 }
 
-/* ---------- sidebar: portrait wallpaper + scrim ---------- */
+/* ---------- sidebar: plain curtain (no wallpaper) ---------- */
 
 body[data-dsh-aimesi] :is([data-pane='sidebar'], [class*='sidebarCol']) {
   position: relative;
@@ -145,10 +145,9 @@ body[data-dsh-aimesi] :is([data-pane='sidebar'], [class*='sidebarCol']) {
       rgba(15, 9, 26, 0.42) 30%,
       rgba(15, 9, 26, 0.5) 55%,
       rgba(15, 9, 26, 0.9) 100%
-    ),
-    var(--aimesi-sidebar-art);
-  background-size: auto, cover;
-  background-position: center, center 20%;
+    );
+  background-size: auto;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -201,10 +200,9 @@ body[data-dsh-aimesi] [data-aimesi-sidebar-footer] {
 }
 
 /* The character mark replaces the heart above the Plan/settings button.
-   It stands IN FRONT of the curtain (no dark drop-shadow — that shadow line
-   under the figure is gone), with only the pink glow. The curtain below is
-   pulled fully to the sidebar's bottom edge so the figure stands on a
-   uniformly dark ground. */
+   It now stands BEHIND the curtain: a translucent scrim layer sits above the
+   figure (but below the settings row), so the silhouette reads as standing
+   behind the curtain with only the pink glow bleeding through. */
 body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::before {
   content: '';
   position: absolute;
@@ -216,6 +214,23 @@ body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::before {
   pointer-events: none;
   filter: drop-shadow(0 0 9px var(--aimesi-glow));
   animation: aimesiMarkPulse 3.2s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* The curtain in front of the figure: a translucent plum haze laid over the
+   mark (but below the settings row) so the Q-version character stands
+   behind the curtain — its silhouette dimmed yet visible through the scrim. */
+body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 9, 26, 0.32),
+    rgba(15, 9, 26, 0.58)
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 @keyframes aimesiMarkPulse {
@@ -229,7 +244,7 @@ body[data-dsh-aimesi] [data-aimesi-sidebar-footer]::before {
 
 body[data-dsh-aimesi] [data-aimesi-sidebar-footer] [data-slot='sidebar.settings'] {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ---------- top trim: the pink circuit line along the top edge ---------- */

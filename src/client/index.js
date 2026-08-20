@@ -10,8 +10,8 @@
  * background-art.generated.js and this file inside the single
  * __ModuleLoader__ factory scope, so there are deliberately no import/export
  * statements here except the trailing `apply` hand-off appended by the
- * assembler. Symbols in scope: CHAT_BACKDROP / SIDEBAR_BACKDROP /
- * RASTER_HEART_MARK / SIDEBAR_MARK (background-art.generated.js).
+ * assembler. Symbols in scope: CHAT_BACKDROP / RASTER_HEART_MARK /
+ * SIDEBAR_MARK / CHAT_MARK (background-art.generated.js).
  */
 
 const SKIN_OWNER = 'aimesi'
@@ -22,7 +22,6 @@ const ACTIVE_CHAT_SELECTOR = "[data-phase='active'] [data-chat-flow]"
 const COMPOSER_CARD_SELECTOR = "[data-phase='hero'] [data-composer-card], [data-phase='active'] [data-composer-card]"
 const ART_SLOT_PROPERTIES = [
   '--aimesi-chat-art',
-  '--aimesi-sidebar-art',
   '--aimesi-raster-heart-art',
   '--aimesi-sidebar-mark-art',
   '--aimesi-chat-mark-art',
@@ -95,7 +94,6 @@ function apply(ctx) {
   // background layer (scrim + wallpaper) so light/dark switching re-tints the
   // scrim without touching the artwork URL.
   body.style.setProperty('--aimesi-chat-art', `url(${CHAT_BACKDROP})`)
-  body.style.setProperty('--aimesi-sidebar-art', `url(${SIDEBAR_BACKDROP})`)
   body.style.setProperty('--aimesi-raster-heart-art', `url(${RASTER_HEART_MARK})`)
   body.style.setProperty('--aimesi-sidebar-mark-art', `url(${SIDEBAR_MARK})`)
   body.style.setProperty('--aimesi-chat-mark-art', `url(${CHAT_MARK})`)
