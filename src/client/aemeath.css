@@ -327,10 +327,10 @@ body[data-dsh-aemeath] [data-skin-chrome='conversation-mark'] {
   position: fixed;
   top: 76px;
   right: 20px;
-  width: 132px;
+  width: 170px;
   z-index: 18;
   pointer-events: none;
-  background: var(--aemeath-chat-mark-art) center / contain no-repeat;
+  background: var(--aemeath-companion-art) center / contain no-repeat;
   filter:
     drop-shadow(0 0 14px var(--aemeath-glow))
     drop-shadow(0 6px 14px rgba(24, 8, 36, 0.35));
@@ -340,8 +340,28 @@ body[data-dsh-aemeath] [data-skin-chrome='conversation-mark'] {
 body[data-dsh-aemeath] [data-skin-chrome='conversation-mark']::after {
   content: '';
   display: block;
-  /* Reserve the figure's aspect ratio (480:449) so the box keeps its shape. */
-  padding-top: 93.5%;
+  /* Reserve the figure's square aspect ratio (1000:1000) so the box keeps
+     its shape. */
+  padding-top: 100%;
+}
+
+/* ---------- composer dock: history never below the input box ---------- */
+
+/* The stock conversation scrolls the whole flow and keeps the composer seat
+   sticky at the bottom; the seat's fade background targets
+   --dsw-alias-bg-base, which this skin sets to transparent — so history
+   scrolled visibly behind/under the input box. The dock below repaints the
+   seat with the SAME wallpaper + scrim layers as the body (fixed attachment
+   keeps them aligned with the viewport), so the artwork stays continuous
+   and unclipped while the composite (opaque wallpaper under the scrim)
+   hides everything scrolling underneath: history is only ever visible
+   above the composer. */
+body[data-dsh-aemeath] [data-phase='active'] [data-composer-seat] {
+  background-image: var(--aemeath-backdrop-scrim), var(--aemeath-chat-art);
+  background-position: center, center top;
+  background-size: auto, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
 }
 
 /* ---------- composer: pink glass plate with mecha corner brackets ---------- */

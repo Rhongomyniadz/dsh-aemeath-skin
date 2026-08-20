@@ -25,6 +25,7 @@ const ART_SLOT_PROPERTIES = [
   '--aemeath-raster-heart-art',
   '--aemeath-sidebar-mark-art',
   '--aemeath-chat-mark-art',
+  '--aemeath-companion-art',
 ]
 
 /** Four mecha HUD corner brackets, absolutely positioned by the stylesheet. */
@@ -97,6 +98,7 @@ function apply(ctx) {
   body.style.setProperty('--aemeath-raster-heart-art', `url(${RASTER_HEART_MARK})`)
   body.style.setProperty('--aemeath-sidebar-mark-art', `url(${SIDEBAR_MARK})`)
   body.style.setProperty('--aemeath-chat-mark-art', `url(${CHAT_MARK})`)
+  body.style.setProperty('--aemeath-companion-art', `url(${CHAT_COMPANION})`)
 
   // Browser chrome color follows the plum shell.
   const syncSystemChrome = () => {

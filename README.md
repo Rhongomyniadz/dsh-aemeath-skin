@@ -4,6 +4,8 @@ DeepSeek Harness Web GUI 皮肤：**爱弥斯主题**。
 
 - 对话区背景：`assets/chat.webp`
 - 侧栏背景：`assets/sidebar.webp`
+- 对话右上角角色立绘：`assets/chat-companion.webp`（源图 `chat-companion.png`，
+  构建脚本内嵌的是 webp；替换后重新 build 即可）
 - 粉色主色 + 深莓紫玻璃面板 + 电光粉信号线 + HUD 角标
 
 ## 安装
