@@ -34,9 +34,9 @@ body[data-dsh-aemeath] {
   --aemeath-plum-700: #382654;
   --aemeath-steel: #4a4460;
   --aemeath-ice: #b9c8ff;
-  /* Sidebar row interactive blocks: blue on the left fading to white. */
+  /* Sidebar row interactive blocks: pink on the left fading to blue. */
+  --aemeath-row-pink: #ff6fb1;
   --aemeath-row-blue: #8fb4ff;
-  --aemeath-row-white: #ffffff;
   --aemeath-sidebar-width: 280px;
   --aemeath-backdrop-scrim: linear-gradient(
     180deg,
@@ -92,10 +92,9 @@ body[data-dsh-aemeath][data-ds-dark-theme] {
     rgba(15, 10, 26, 0.74) 100%
   );
   --aemeath-shadow-dark: 0 18px 58px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.36);
-  /* Sidebar row interactive blocks: deep blue on the left fading to a
-     near-white so the dark theme keeps the same shape. */
+  /* Sidebar row interactive blocks: deep pink on the left fading to blue. */
+  --aemeath-row-pink: #f04a97;
   --aemeath-row-blue: #4f76e0;
-  --aemeath-row-white: #edf1ff;
   --dsw-alias-bg-base: transparent;
   --dsw-alias-bg-layer-1: rgba(30, 20, 48, 0.88);
   --dsw-alias-bg-layer-2: rgba(36, 24, 56, 0.9);
@@ -240,11 +239,11 @@ body[data-dsh-aemeath] [data-aemeath-sidebar-footer]::after {
   z-index: 1;
 }
 
-/* ---------- sidebar rows: blue → white interactive blocks ---------- */
+/* ---------- sidebar rows: pink → blue interactive blocks ---------- */
 
 /* Workspace and conversation rows are horizontal blocks; their interactive
    state (hover / selected / open menu) fills with a gradient that starts
-   blue on the left and fades gradually to white on the right. A smooth
+   pink on the left and fades gradually to blue on the right. A smooth
    background transition replaces the stock instant switch. */
 body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) .YDXeBa_projectRow,
 body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) .YDXeBa_sessionRow {
@@ -256,7 +255,7 @@ body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) .YDXeBa
 body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) .YDXeBa_sessionRow:hover,
 body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) .YDXeBa_sessionRow.YDXeBa_selected,
 body[data-dsh-aemeath] :is([data-pane='sidebar'], [class*='sidebarCol']) .YDXeBa_sessionRow.YDXeBa_menuOpen {
-  background: linear-gradient(90deg, var(--aemeath-row-blue) 0%, var(--aemeath-row-white) 100%);
+  background: linear-gradient(90deg, var(--aemeath-row-pink) 0%, var(--aemeath-row-blue) 100%);
 }
 
 @keyframes aemeathMarkPulse {
